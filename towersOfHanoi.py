@@ -97,9 +97,8 @@ class TowerOfHanoi:
 
             self.legalMoveDisk(middleRod, destinationRod)
 
+    # if there more than 3 Rods (it's not an optimal solution)
     def towerOfHanoi_nthRods(self, startingRod, middleRod, destinationRod):
-        self.putDiskInStartingRod(startingRod)
-        self.printRods()
         otherMiddleRods = []
         for i in range(self.rod):
             if i != startingRod and i != middleRod and i != destinationRod:
@@ -122,14 +121,16 @@ class TowerOfHanoi:
         if startingRod > self.rod - 1 or middleRod > self.rod - 1 or destinationRod > self.rod - 1:
             return None
 
-        # tower of Hanoi with rod more than 3, not an optimal solution
-        elif self.rod > 3:
-            self.towerOfHanoi_nthRods(startingRod, middleRod, destinationRod)
-            return
-
+        # put all the disk in starting Rod and print out
         self.putDiskInStartingRod(startingRod)
         self.printRods()
 
+        # tower of Hanoi with rod more than 3, not an optimal solution
+        if self.rod > 3:
+            self.towerOfHanoi_nthRods(startingRod, middleRod, destinationRod)
+            return
+
+        # if number of disk is even for 3 Rods
         if self.disk % 2 == 0:
             self.towerOfHanoi_evenDisk(startingRod, middleRod, destinationRod)
         else:
